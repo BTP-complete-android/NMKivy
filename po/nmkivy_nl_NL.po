@@ -1,0 +1,156 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nmkivy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-03 09:28+0100\n"
+"PO-Revision-Date: 2023-02-03 09:32+0100\n"
+"Last-Translator: Stas Zytkiewicz <stas.zytkiewicz@gmail.com>\n"
+"Language-Team: stas@btp.nl\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: ../main.py:334
+msgid ""
+"Cannot connect to the BTP+ server. Please use another connection or contact "
+"your IT department."
+msgstr ""
+"Kan geen verbinding maken met de BTP+ server. Gebruik een andere verbinding "
+"aub of neem contact op met uw IT afdeling."
+
+#: ../main.py:115
+msgid "Connect"
+msgstr "Verbind"
+
+#: ../main.py:302 ../main.py:401
+#, python-brace-format
+msgid "Connected to {ssid}"
+msgstr "Verbonden met {ssid}"
+
+#: ../main.py:326
+#, python-brace-format
+msgid "Connected {con[0]} to {con[1]}\n"
+msgstr "Verbonden {con[0]} met {con[1]}\n"
+
+#: ../main.py:116 ../main.py:207
+msgid "Exit"
+msgstr "Afsluiten"
+
+#: ../main.py:300 ../main.py:391
+#, python-brace-format
+msgid "Failed to connect to {ssid}"
+msgstr "Mislukt om te verbinden met {ssid}"
+
+#: ../main.py:304
+#, python-brace-format
+msgid "Failed to connect to {ssid}, check your password."
+msgstr "Mislukt om te verbinden met {ssid}, controleer uw wachtwoord."
+
+#: ../main.py:394
+#, python-brace-format
+msgid "Failed to connect to {ssid}, wrong password?"
+msgstr "Mislukt om te verbinden met {ssid}, verkeerd wachtwoord?"
+
+#: ../main.py:369
+msgid ""
+"Failed to start network and/or wifi radio\n"
+"Make sure the wifi is enabled."
+msgstr ""
+"Niet gelukt om het netwerk en/of de wifi radio te starten\n"
+"Vergewis u ervan dat de wifi beschikbaar is."
+
+#: ../main.py:157
+msgid "No"
+msgstr "Nee"
+
+#: ../main.py:358
+msgid "No wifi access points found"
+msgstr "Geen wifi toegangspunt gevonden"
+
+#: ../main.py:349
+msgid "No wired device found"
+msgstr "Geen bedraad apparaat gevonden"
+
+#: ../main.py:134
+msgid "Please give a password"
+msgstr "Geef een wachtwoord aub"
+
+#: ../main.py:206
+msgid "Scan"
+msgstr "Scan"
+
+#: ../main.py:265
+msgid "Scanning done."
+msgstr "Scannen klaar."
+
+#: ../main.py:236
+msgid "Scanning, please wait..."
+msgstr "Scannen, ogenblik..."
+
+#: ../main.py:118
+msgid "Show password"
+msgstr "Toon wachtwoord"
+
+#: ../main.py:297
+#, python-brace-format
+msgid "Start Connecting to {ssid}..."
+msgstr "Start verbinden met {ssid}..."
+
+#: ../main.py:208
+msgid "Start Update"
+msgstr "Start Update"
+
+#: ../main.py:386
+#, python-brace-format
+msgid "Start connecting to {ssid}, please wait..."
+msgstr "Start verbinden met {ssid}, ogenblik..."
+
+#: ../main.py:370
+msgid "Start network scan again after 5 seconds, please wait..."
+msgstr "Start de netwerk scan na 5 seconden, ogenblik geduld..."
+
+#: ../main.py:374
+msgid "Start network scan..."
+msgstr "Start netwerk scan..."
+
+#: ../main.py:338
+msgid "The BTP+ server is available. You can update this machine."
+msgstr "De BTP+ server is beschikbaar. U kunt deze machine updaten."
+
+#: ../main.py:134
+msgid "Wifi Password"
+msgstr "Wifi wachtwoord"
+
+#: ../main.py:117
+msgid "Wifi password"
+msgstr "Wifi wachtwoord"
+
+#: ../main.py:156
+msgid "Yes"
+msgstr "Ja"
+
+#: ../main.py:73
+msgid ""
+"Your about to start the updater which will update this system.\n"
+"Be aware that this can take between 15 minutes and one hour depending on the "
+"size of the update.\n"
+"\n"
+"** The update can not be interrupted! ** \n"
+"\n"
+"Do you want to start updating this system?"
+msgstr ""
+"U staat op het punt om de updater te starten die het systeem zal updaten.\n"
+"Let op dat dit tussen 15 minuten en een uur kan duren afhankelijk van de "
+"grootte van de update.\n"
+"\n"
+"** De update kan niet onderbroken worden! **\n"
+"\n"
+"Wilt u het systeem nu updaten?"

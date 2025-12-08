@@ -1,0 +1,6 @@
+Everything, except the nmcli libs, is licensed under the GPL version 3.
+For the complete license text see the file LICENSE
+
+The nmcli package comes from https://github.com/ushiboy/nmcli
+and is licensed under the MIT license, see LICENSE.txt inside
+the nmcli package.

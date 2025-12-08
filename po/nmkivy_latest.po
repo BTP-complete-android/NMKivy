@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-03 09:28+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../main.py:334
+msgid ""
+"Cannot connect to the BTP+ server. Please use another connection or contact "
+"your IT department."
+msgstr ""
+
+#: ../main.py:115
+msgid "Connect"
+msgstr ""
+
+#: ../main.py:302 ../main.py:401
+#, python-brace-format
+msgid "Connected to {ssid}"
+msgstr ""
+
+#: ../main.py:326
+#, python-brace-format
+msgid "Connected {con[0]} to {con[1]}\n"
+msgstr ""
+
+#: ../main.py:116 ../main.py:207
+msgid "Exit"
+msgstr ""
+
+#: ../main.py:300 ../main.py:391
+#, python-brace-format
+msgid "Failed to connect to {ssid}"
+msgstr ""
+
+#: ../main.py:304
+#, python-brace-format
+msgid "Failed to connect to {ssid}, check your password."
+msgstr ""
+
+#: ../main.py:394
+#, python-brace-format
+msgid "Failed to connect to {ssid}, wrong password?"
+msgstr ""
+
+#: ../main.py:369
+msgid ""
+"Failed to start network and/or wifi radio\n"
+"Make sure the wifi is enabled."
+msgstr ""
+
+#: ../main.py:157
+msgid "No"
+msgstr ""
+
+#: ../main.py:358
+msgid "No wifi access points found"
+msgstr ""
+
+#: ../main.py:349
+msgid "No wired device found"
+msgstr ""
+
+#: ../main.py:134
+msgid "Please give a password"
+msgstr ""
+
+#: ../main.py:206
+msgid "Scan"
+msgstr ""
+
+#: ../main.py:265
+msgid "Scanning done."
+msgstr ""
+
+#: ../main.py:236
+msgid "Scanning, please wait..."
+msgstr ""
+
+#: ../main.py:118
+msgid "Show password"
+msgstr ""
+
+#: ../main.py:297
+#, python-brace-format
+msgid "Start Connecting to {ssid}..."
+msgstr ""
+
+#: ../main.py:208
+msgid "Start Update"
+msgstr ""
+
+#: ../main.py:386
+#, python-brace-format
+msgid "Start connecting to {ssid}, please wait..."
+msgstr ""
+
+#: ../main.py:370
+msgid "Start network scan again after 5 seconds, please wait..."
+msgstr ""
+
+#: ../main.py:374
+msgid "Start network scan..."
+msgstr ""
+
+#: ../main.py:338
+msgid "The BTP+ server is available. You can update this machine."
+msgstr ""
+
+#: ../main.py:134
+msgid "Wifi Password"
+msgstr ""
+
+#: ../main.py:117
+msgid "Wifi password"
+msgstr ""
+
+#: ../main.py:156
+msgid "Yes"
+msgstr ""
+
+#: ../main.py:73
+msgid ""
+"Your about to start the updater which will update this system.\n"
+"Be aware that this can take between 15 minutes and one hour depending on the "
+"size of the update.\n"
+"\n"
+"** The update can not be interrupted! ** \n"
+"\n"
+"Do you want to start updating this system?"
+msgstr ""

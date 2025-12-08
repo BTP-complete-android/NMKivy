@@ -1,0 +1,15 @@
+(Linux setup)
+We use a patched version of kivy on the BTP machines.
+For you development system you can do the following:
+(This is my setup)
+I just grap the installed kivy package from /usr/lib/python2.7/dist-packages/kivy
+and place it in my home dir and name it kivy-btp.
+I then replace kivy-btp/data/images/defaulttheme.atlas and defaulttheme-0.png with the ones
+from this directory.
+I also replace kivy-btp/data/style.py
+
+Then I make a symlink from within the childsplay tree:
+cd ~/GIT/childsplay
+ln -s ../../kivy-btp kivy
+
+Done, now childsplay will use the kivy from the homedirectory.

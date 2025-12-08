@@ -1,0 +1,224 @@
+#: kivy 2.1.0
+#: import Style Style
+#: import version version
+
+# Copyright (c) 2022 Stas Zytkiewicz <stas@childsplay.mobi>
+# Copyright (c) 2022 BTP <info@btp.nl>
+
+<MyLabel@Label>:
+    color: Style.MainMenuStyle().fontcolor
+    font_size: Style.MainMenuStyle().fontsize
+    size_hint: 1, 0.1
+    text_size: self.size
+    halign: 'left'
+
+<MyToggle@ToggleButton>:
+    text: root.text
+    group: 'wifi'
+    background_down: 'buttons/100_100_green.png'
+    background_normal: 'buttons/100_100_black.png'
+    on_press: app.root.on_connect_toggle_button_clicked(self)
+    on_state:
+        if self.state == 'down': self.text = 'Connected'
+        else: self.text = 'Connect'
+
+<MyButton@Button>:
+    text: "Close"
+    bold: True
+    background_normal: 'buttons/100_100_blue.png'
+    background_down: 'buttons/100_100_black.png'
+    font_size: '30sp'
+
+<NMDialog>:
+    orientation: 'vertical'
+
+    padding: 10
+    spacing: 10
+
+    canvas:
+        Color:
+            rgb: Style.MainMenuStyle().backcolor
+        Rectangle:
+            size: self.size
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1, 0.1
+        MyLabel:
+            text: "Welcome to the BrainTrainerPlus Network Manager"
+            halign: 'center'
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.7, 1
+        MyButton:
+            text: "Forget all connections"
+            size_hint_x: 0.3
+            font_size: '20sp'
+            on_release: root.on_forget_button_clicked()
+
+    GridLayout:
+        id: ethbox
+        rows: 2
+        cols: 2
+        spacing: 10
+        size_hint_y: 0.2
+
+        canvas.before:
+            Color:
+                rgb: [0.85, 0.85, 0.9]
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+    ScrollView:
+        id: wifibox
+        do_scroll_x: False
+        do_scroll_y: True
+
+        canvas.before:
+            Color:
+                rgb: [0.85, 0.85, 0.9]
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+    MyLabel:
+        id: connect_label
+        text: "Not Connected"
+        font_size: '14dp'
+        size_hint_y: 0.1
+        padding_y: 0
+        valign: 'top'
+
+        canvas.before:
+            Color:
+                rgb: [0.85, 0.85, 0.9]
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+    BoxLayout:
+        spacing: 10
+        size_hint_y: 0.2
+        MyButton:
+            text: root.text_scan
+            size_hint: (0.5, 0.5)
+            on_press: root.on_scan_button_clicked()
+
+        MyButton:
+            text: root.text_close
+            size_hint: (0.5, 0.5)
+            on_release: root.observer.on_close_button_clicked()
+
+        MyButton:
+            id: update_button
+            text: root.text_update
+            disabled: True
+            size_hint: (0.5, 0.5)
+            on_release: root.observer.on_update_button_clicked()
+
+    BoxLayout:
+        spacing: 10
+        size_hint_y: 0.2
+
+        MyLabel:
+            id: status_label
+            size_hint_y: 1
+            valign: 'center'
+            markup: True
+            text: "Startup network and wifi radios, please wait..."
+
+#    ProgressBar:
+#        id: prog_b
+#        min: 0
+#        max: 1
+#        value: 0
+#        size_hint_y: 0.1
+
+    MyLabel:
+        font_size: '10dp'
+        size_hint_y: 0.05
+        halign: 'center'
+        text: f"NMKivy Version: {version.version}"
+
+<_InputContent>:
+
+    input: input
+
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+    BoxLayout:
+        MyLabel:
+            text: root.text_pass
+            bold: True
+            markup: True
+            font_size: '17dp'
+            size_hint: 0.3, 0.6
+            text_size: self.width, None
+            valign: 'center'
+
+        TextInput:
+            id: input
+            multiline: False
+            font_size: '17dp'
+            size_hint: 0.7, 0.6
+            focus: True
+            password: False
+
+    BoxLayout:
+        CheckBox:
+            size_hint: 0.1, 0.5
+            state: 'down'
+            on_state:
+                if self.state == 'down': root.input.password = False
+                else: root.input.password = True
+
+        MyLabel:
+            text: root.text_show
+            size_hint_y: 0.5
+            valign: 'center'
+
+    BoxLayout:
+        spacing: 10
+
+        MyButton:
+            id: start_button
+            text: root.text_ok
+            size_hint: (0.5, 0.5)
+            on_press: root.on_start_button_clicked()
+
+        MyButton:
+            text: root.text_exit
+            size_hint: (0.5, 0.5)
+            on_release: root.on_close_button_clicked()
+
+<_YesNoDialogContent>:
+    # Reminder: we extend BoxLayout with this object so no need to add a 'root' layout
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    Widget:
+        size_hint_y: 0.05
+    MyLabel:
+        size_hint: 1, 1
+        text: root.text
+        markup: True
+        valign: 'center'
+
+    Widget:
+        size_hint_y: 0.05
+
+    BoxLayout:
+        id: but_box
+        spacing: 10
+        size_hint_y: 0.2
+        MyButton:
+            id: no_button
+            text: root.text_no
+            on_release: root.on_no_button_clicked()
+        MyButton:
+            id: close_button
+            text: root.text_yes
+            on_press: root.on_yes_button_clicked()
+
