@@ -17,4 +17,3 @@ pkill -f $py_ex
 cd /usr/local/share/nmkivy
 
 $py_ex main.py
-
