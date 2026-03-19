@@ -501,6 +501,7 @@ class Controller:
         # In case we have a onscreen keyboard
         Window.release_all_keyboards()
         App.get_running_app().stop()
+        os.system('/usr/local/bin/start_gamesmenu_classic')
 
     def on_forget_button_clicked(self):
         """ Called from the kv"""
