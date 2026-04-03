@@ -72,7 +72,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 
 base = os.path.dirname(os.path.abspath(__file__))
-Builder.load_file(os.path.join(base, 'main.kv'))
+Builder.load_file(os.path.join(base, 'main-nm.kv'))
 
 
 updater_text = _("""Your about to start the updater which will update this system.

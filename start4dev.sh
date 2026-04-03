@@ -7,6 +7,6 @@ if [[ -z "${VIRTUAL_ENV}" ]]; then
         exit 1
 fi
 
-python3 main.py
+python3 main-nm.py
 
 

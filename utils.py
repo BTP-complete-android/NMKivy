@@ -35,7 +35,7 @@ nmcli.disable_use_sudo()
 
 LOCALEDIR = 'locale'
 
-# These will be changed by a call to set_locale in main.py
+# These will be changed by a call to set_locale in main-nm.py
 LANG = 'en'
 LOCALE_RTL = None
 PROVISIONER =  "https://provisioner.braintrainerplus.com.au"
