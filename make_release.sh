@@ -16,7 +16,7 @@ cd -
 
 echo "Copy py files, excluding debug files"
 cp *.py $NAME
-cp main.kv $NAME
+cp main-nm.kv $NAME
 cp -r buttons locale patches $NAME
 cp nmkivy.sh $NAME
 
