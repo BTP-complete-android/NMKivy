@@ -10,10 +10,6 @@ else
 fi
 
 
-#we must kill btp as Kivy is a bit borg-ish about multiple windows
-# we kill everything that's running the btp stuff
-pkill -9 -f $py_ex
-
 cd /usr/local/share/nmkivy
 
 $py_ex main-nm.py
