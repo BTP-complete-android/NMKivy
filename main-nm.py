@@ -17,12 +17,9 @@
 
 __author__ = 'stas Zytkiewicz stas@childsplay.mobi'
 
-import os
-# Will setup logging
 import sys
 
 import SPLogging
-import utils
 
 SPLogging.set_level('debug')
 SPLogging.start()
@@ -41,16 +38,40 @@ resource_add_path('patches')
 ##########################################################
 
 from utils import *
-set_locale()
+lang, RTL = set_locale()
 
 from kivy.config import Config
 # print("**** enable the inspector ****")
 # Config.set('modules', 'inspector', 1)
-print(environ.keys())
+#print(environ.keys())
 if 'DEBUG' not in environ.keys():
     Config.set('graphics', 'fullscreen', 'auto')
 else:
     Config.set('modules', 'inspector', 1)
+
+# --- Keyboard Configuration must happen before Window import ---
+# we always set the keyboard to system and the current locale
+if lang[:5] == 'es_ES':
+    vk_lang = 'es_ES'
+else:
+    vk_lang = 'en_US'
+
+# we check if a USB keyboard is connected or not
+cmd = "lsusb -v 2>/dev/null | egrep '(^Bus|Keyboard)' | grep -B1 Keyboard"
+child = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+result = child.communicate()[0]
+
+if 'Keyboard' in result.decode('utf-8'):
+    vk_mode = 'system'
+else:
+    vk_mode = 'dock' # 'systemanddock' often fails to fall back on Linux
+
+if os.environ.get('DEBUG', False):
+    vk_mode = 'dock'
+
+Config.set('kivy', 'keyboard_mode', vk_mode)
+Config.set('kivy', 'keyboard_layout', vk_lang)
+# ---------------------------------------------------------------
 
 from functools import partial
 
@@ -70,9 +91,21 @@ from kivy.core.window import Window
 from kivy.animation import Animation
 from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
+from kivy.uix.vkeyboard import VKeyboard
 
 base = os.path.dirname(os.path.abspath(__file__))
 Builder.load_file(os.path.join(base, 'main-nm.kv'))
+
+class BTPKeyboard(VKeyboard):
+    def __init__(self, **kwargs):
+        super(BTPKeyboard, self).__init__(**kwargs)
+        self.size_hint = (0.8,0.3)
+        #self.opacity = 0.7
+        self.key_border = [0, 10, 0, 10]
+        self.setup_mode()
+
+Window.set_vkeyboard_class(BTPKeyboard)
+
 
 
 updater_text = _("""Your about to start the updater which will update this system.
@@ -145,7 +178,7 @@ class InputDialog(Popup):
         """
         super(InputDialog, self).__init__(title=title, size_hint=(0.9, 0.4), auto_dismiss=False)
         self.auto_dismiss = False
-        self.pos_hint = {'center_y': 0.5}
+        self.pos_hint = {'center_y': 0.7}
         self.content = _InputContent(obs, parent=self, **kwargs)
         self.border = (74, 32, 74, 32)
 
@@ -464,7 +497,9 @@ class Controller:
             reset_connection(ssid)
         elif result == -1:
             # Unknown connection, needs a password (probably)
-            InputDialog(obs=partial(self._get_wifi_pass, ssid)).open()
+            dlg = InputDialog(obs=partial(self._get_wifi_pass, ssid))
+            dlg.open()
+            dlg.content.ids.input.focus = True
         else:
             obj.state = 'down'
             obj.connected_state = True

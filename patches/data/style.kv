@@ -1,10 +1,10 @@
-#:kivy 1.0
-#: import StyleBase Style.StyleBase
+#:kivy 2.3.0
+#:import StyleBase Style.StyleBase
 
 <Label>:
     canvas:
         Color:
-            rgba: self.disabled_color if self.disabled else (self.color if not self.markup else (1, 1, 1, 1))
+            rgba: 1, 1, 1, 1
         Rectangle:
             texture: self.texture
             size: self.texture_size
@@ -22,7 +22,7 @@
             size: self.size
             source: self.disabled_image if self.disabled else self.state_image
         Color:
-            rgba: self.disabled_color if self.disabled else self.color
+            rgba: 1, 1, 1, 1
         Rectangle:
             texture: self.texture
             size: self.texture_size
@@ -30,16 +30,16 @@
 
 <BubbleContent>
     opacity: .7 if self.disabled else 1
-    rows: 1
+    orientation: "horizontal"
     canvas:
         Color:
-            rgba: self.parent.background_color if self.parent else (1, 1, 1, 1)
+            rgba: self.background_color
         BorderImage:
-            border: self.parent.border if self.parent else (16, 16, 16, 16)
-            texture: root.parent._bk_img.texture if root.parent else None
+            border: self.border
+            source: self.background_image
             size: self.size
             pos: self.pos
-            auto_scale: root.parent.border_auto_scale if self.parent else 'off'
+            auto_scale: self.border_auto_scale
 
 <BubbleButton>:
     background_normal: 'atlas://data/images/defaulttheme/bubble_btn'
@@ -73,8 +73,7 @@
         pos: (root.value_pos[0] - root.cursor_width / 2, root.center_y - root.cursor_height / 2) if root.orientation == 'horizontal' else (root.center_x - root.cursor_width / 2, root.value_pos[1] - root.cursor_height / 2)
         size: root.cursor_size
         source: root.cursor_disabled_image if root.disabled else root.cursor_image
-        allow_stretch: True
-        keep_ratio: False
+        fit_mode: "fill"
 
 <ProgressBar>:
     canvas:
@@ -99,7 +98,7 @@
     Image:
         pos: root.pos
         size: root.size
-        allow_stretch: True
+        fit_mode: "contain"
         source: 'atlas://data/images/defaulttheme/splitter_grip' + root.horizontal
 
 <Scatter>:
@@ -123,10 +122,20 @@
     canvas:
         Color:
             rgba: self.color
+        StencilPush
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        StencilUse
         Rectangle:
             texture: self.texture
             size: self.norm_image_size
             pos: self.center_x - self.norm_image_size[0] / 2., self.center_y - self.norm_image_size[1] / 2.
+        StencilUnUse
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        StencilPop
 
 <EffectWidget>:
     canvas.before:
@@ -175,7 +184,8 @@
     font_size: '15sp'
 
 <Selector>
-    allow_stretch: True
+    color: 148. / 255, 208 / 255., 230 / 255., 1
+    fit_mode: "contain"
 
 <TextInput>:
     canvas.before:
@@ -199,6 +209,7 @@
             rgba: self.disabled_foreground_color if self.disabled else (self.hint_text_color if not self.text else self.foreground_color)
 
 <TextInputCutCopyPaste>:
+    content: content.__self__
     but_cut: cut.__self__
     but_copy: copy.__self__
     but_paste: paste.__self__
@@ -206,25 +217,27 @@
 
     size_hint: None, None
     size: '150sp', '50sp'
-    BubbleButton:
-        id: cut
-        text: 'Cut'
-        on_release: root.do('cut')
-    BubbleButton:
-        id: copy
-        text: 'Copy'
-        on_release: root.do('copy')
-    BubbleButton:
-        id: paste
-        text: 'Paste'
-        on_release: root.do('paste')
-    BubbleButton:
-        id: selectall
-        text: 'Select All'
-        on_release: root.do('selectall')
+    BubbleContent:
+        id: content
+        BubbleButton:
+            id: cut
+            text: 'Cut'
+            on_release: root.do('cut')
+        BubbleButton:
+            id: copy
+            text: 'Copy'
+            on_release: root.do('copy')
+        BubbleButton:
+            id: paste
+            text: 'Paste'
+            on_release: root.do('paste')
+        BubbleButton:
+            id: selectall
+            text: 'Select All'
+            on_release: root.do('selectall')
 
 <CodeInput>:
-    font_name: 'data/fonts/{0}Mono-Regular.ttf'.format(StyleBase.fontname)
+    font_name: 'data/fonts/RobotoMono-Regular.ttf'
 
 
 <TreeViewNode>:
@@ -390,15 +403,16 @@
         id: layout
         controller: root
 
-[FileIconEntry@Widget]:
+[FileIconEntry@BoxLayout]:
     locked: False
     path: ctx.path
     selected: self.path in ctx.controller().selection
-    size_hint: None, None
+    size_hint: 0.2, None
+    orientation: 'vertical'
 
     on_touch_down: self.collide_point(*args[1].pos) and ctx.controller().entry_touched(self, args[1])
     on_touch_up: self.collide_point(*args[1].pos) and ctx.controller().entry_released(self, args[1])
-    size: '256dp', '148dp'
+    size: '100dp', '100dp'
 
     canvas:
         Color:
@@ -408,19 +422,32 @@
             pos: root.pos
             size: root.size
             source: 'atlas://data/images/defaulttheme/filechooser_selected'
+
     Image:
-        size: '110dp', '110dp'
+        id: image
+        #size: '64dp', '64dp'
+        size_hint: 1, 0.8
         source: 'atlas://data/images/defaulttheme/filechooser_%s' % ('folder' if ctx.isdir else 'file')
-        allow_stretch: True
-        pos: root.x + dp(76), root.y + dp(40)
+        pos: root.x + dp(24), root.y + dp(40)
     Label:
-        text: "{0}\n{1}".format(ctx.name, ctx.get_nice_size())
+        text: ctx.name
+        font_name: ctx.controller().font_name
+        text_size: (root.width, self.height)
         halign: 'center'
         shorten: True
-        size: '256dp', '32dp'
-        pos: root.x, root.y
-        font_size: '16dp'
-        color: 1, 1, 1, 1
+        color: .1, .1, .1, 1
+        #size: '100dp', '16dp'
+        size_hint: 1, 0.2
+        pos: root.x, root.y + dp(16)
+    Label:
+        text: '{}'.format(ctx.get_nice_size())
+        font_name: ctx.controller().font_name
+        font_size: '11sp'
+        color: .8, .8, .8, 1
+        #size: '100dp', '16sp'
+        size_hint: 1, 0.2
+        pos: root.pos
+        halign: 'center'
 
 <FileChooserProgress>:
     pos_hint: {'x': 0, 'y': 0}
@@ -499,13 +526,13 @@
             source: root.background
             # We need to adjust the border image according to the size of the popup
             # border: 20,20, 32,20 # For small
-            # border: 20,20, 46,20 # For large
-            border: 20,20, 32 if not self._window else 32 if (self.height / self._window.height < 0.4) else 46 ,20
+            # border: 20,20, 48,20 # For large
+            border: 20,20, 32 if not self._window else 32 if (self.height / self._window.height < 0.4) else 50 ,20
             pos: self.pos
             size: self.size
 
-# Popup widget
 
+# Popup widget
 <Popup>:
     _container: container
     GridLayout:
@@ -517,14 +544,14 @@
 
         Label:
             text: root.title
-            color: root.title_color
+            color: StyleBase.titlecolor
             size_hint_y: None
             height: self.texture_size[1] + dp(16)
             text_size: self.width - dp(16), None
-            font_size: root.title_size
+            font_size: StyleBase.titlesize
             font_name: root.title_font
             halign: root.title_align
-            markup: True
+            #markup: True
 
         Widget:
             size_hint_y: None
@@ -597,7 +624,7 @@
     color: self.color[:3] + [0 if (root.icon and not root.inside_group) else 1]
 
     Image:
-        allow_stretch: True
+        fit_mode: "contain"
         opacity: 1 if (root.icon and not root.inside_group) else 0
         source: root.icon
         mipmap: root.mipmap
@@ -648,7 +675,7 @@
                     id: prev_icon_image
                     source: root.previous_image
                     opacity: 1 if root.with_previous else 0
-                    allow_stretch: True
+                    fit_mode: "contain"
                     size_hint_x: None
                     temp_width: root.previous_image_width or dp(prev_icon_image.texture_size[0])
                     temp_height: root.previous_image_height or dp(prev_icon_image.texture_size[1])
@@ -660,7 +687,7 @@
                 ActionPreviousImage:
                     id: app_icon_image
                     source: root.app_icon
-                    allow_stretch: True
+                    fit_mode: "contain"
                     size_hint_x: None
                     temp_width: root.app_icon_width or dp(app_icon_image.texture_size[0])
                     temp_height: root.app_icon_height or dp(app_icon_image.texture_size[1])
@@ -864,6 +891,7 @@
         font_size: '15sp'
 
 <SettingTitle>:
+    text: self.title
     text_size: self.width - 32, None
     size_hint_y: None
     height: max(dp(20), self.texture_size[1] + dp(20))
@@ -969,7 +997,6 @@
         pos: root.pos
         cols: 1
         id: menu
-        orientation: 'vertical'
         padding: 5
 
         canvas.after:
@@ -1014,7 +1041,6 @@
         width: min(dp(200), 0.3*root.width)
         x: root.x + root.width - self.width
         y: root.y + root.height - self.height
-
 
 <ScrollView>:
     _handle_y_pos: (self.right - self.bar_width - self.bar_margin) if self.bar_pos_y == 'right' else (self.x + self.bar_margin), self.y + self.height * self.vbar[0]
@@ -1081,21 +1107,21 @@
             video: root
             width: '44dp'
             source: root.image_stop
-            allow_stretch: True
+            fit_mode: "contain"
 
         VideoPlayerPlayPause:
             size_hint_x: None
             video: root
             width: '44dp'
             source: root.image_pause if root.state == 'play' else root.image_play
-            allow_stretch: True
+            fit_mode: "contain"
 
         VideoPlayerVolume:
             video: root
             size_hint_x: None
             width: '44dp'
             source: root.image_volumehigh if root.volume > 0.8 else (root.image_volumemedium if root.volume > 0.4 else (root.image_volumelow if root.volume > 0 else root.image_volumemuted))
-            allow_stretch: True
+            fit_mode: "contain"
 
         Widget:
             size_hint_x: None
