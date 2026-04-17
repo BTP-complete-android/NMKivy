@@ -78,6 +78,7 @@ from functools import partial
 import kivy
 kivy.require('2.0.0')
 module_logger.info(f"Using kivy from {kivy}")
+module_logger.info(f"Keyboard mode: {vk_mode}, lang: {vk_lang}")
 
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty, NumericProperty
