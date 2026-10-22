@@ -50,5 +50,7 @@ def resolve_device_locale(explicit=None, shelf_path=SHELF_PATH, environ=None):
         return device_locale
     environment = os.environ if environ is None else environ
     return (normalize_locale(environment.get("LANGUAGE"))
+            or normalize_locale(environment.get("LC_ALL"))
+            or normalize_locale(environment.get("LC_MESSAGES"))
             or normalize_locale(environment.get("LANG"))
             or "en_US.utf8")

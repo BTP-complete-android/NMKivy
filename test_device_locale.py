@@ -34,6 +34,19 @@ class DeviceLocaleTests(unittest.TestCase):
             "nl_NL.utf8",
         )
 
+    def test_locale_category_overrides_are_honored(self):
+        self.assertEqual(
+            resolve_device_locale(
+                shelf_path="/missing",
+                environ={"LC_ALL": "es_ES.UTF-8", "LANG": "nl_NL.UTF-8"},
+            ),
+            "es_ES.utf8",
+        )
+        self.assertEqual(
+            resolve_device_locale(shelf_path="/missing", environ={"LC_MESSAGES": "nl"}),
+            "nl_NL.utf8",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
