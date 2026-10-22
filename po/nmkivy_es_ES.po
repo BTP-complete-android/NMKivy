@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-03 09:28+0100\n"
+"POT-Creation-Date: 2026-10-22 11:42-0400\n"
 "PO-Revision-Date: 2023-02-03 09:31+0100\n"
 "Last-Translator: Stas Zytkiewicz <stas.zytkiewicz@gmail.com>\n"
 "Language-Team: \n"
@@ -18,126 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: ../main.py:334
-msgid ""
-"Cannot connect to the BTP+ server. Please use another connection or contact "
-"your IT department."
-msgstr ""
-"No se puede conectar al servidor BTP+. Utilice otra conexión o póngase en "
-"contacto con el servicio técnico BTP+."
-
-#: ../main.py:115
-msgid "Connect"
-msgstr "Conectar"
-
-#: ../main.py:302 ../main.py:401
-#, python-brace-format
-msgid "Connected to {ssid}"
-msgstr "Conectado a {ssid}"
-
-#: ../main.py:326
-#, python-brace-format
-msgid "Connected {con[0]} to {con[1]}\n"
-msgstr "Conectado {con[0]} a {con[1]}\n"
-
-#: ../main.py:116 ../main.py:207
-msgid "Exit"
-msgstr "Salir"
-
-#: ../main.py:300 ../main.py:391
-#, python-brace-format
-msgid "Failed to connect to {ssid}"
-msgstr "Fallo al conectar con {ssid}"
-
-#: ../main.py:304
-#, python-brace-format
-msgid "Failed to connect to {ssid}, check your password."
-msgstr "Fallo al conectar con {ssid}, revise su contraseña."
-
-#: ../main.py:394
-#, python-brace-format
-msgid "Failed to connect to {ssid}, wrong password?"
-msgstr "Fallo al conectar con {ssid}, revise su contraseña."
-
-#: ../main.py:369
-msgid ""
-"Failed to start network and/or wifi radio\n"
-"Make sure the wifi is enabled."
-msgstr ""
-"No se pudo iniciar la conexión\n"
-"Asegúrese que hay una red wifi disponible."
-
-#: ../main.py:157
-msgid "No"
-msgstr "No"
-
-#: ../main.py:358
-msgid "No wifi access points found"
-msgstr "No se ha encontrado ninguna red wifi"
-
-#: ../main.py:349
-msgid "No wired device found"
-msgstr "No se encontró ningún dispositivo conectado a red"
-
-#: ../main.py:134
-msgid "Please give a password"
-msgstr "Por favor, escriba una contraseña"
-
-#: ../main.py:206
-msgid "Scan"
-msgstr "Escanear"
-
-#: ../main.py:265
-msgid "Scanning done."
-msgstr "Escaneo terminado."
-
-#: ../main.py:236
-msgid "Scanning, please wait..."
-msgstr "Escaneando, por favor espere..."
-
-#: ../main.py:118
-msgid "Show password"
-msgstr "Mostrar contraseña"
-
-#: ../main.py:297
-#, python-brace-format
-msgid "Start Connecting to {ssid}..."
-msgstr "Iniciar la conexión a {ssid}..."
-
-#: ../main.py:208
-msgid "Start Update"
-msgstr "Iniciar la actualización"
-
-#: ../main.py:386
-#, python-brace-format
-msgid "Start connecting to {ssid}, please wait..."
-msgstr "Iniciar la conexión a {ssid}, por favor espere..."
-
-#: ../main.py:370
-msgid "Start network scan again after 5 seconds, please wait..."
-msgstr "Inicie el escaneo de red nuevamente después de 5 segundos, espere..."
-
-#: ../main.py:374
-msgid "Start network scan..."
-msgstr "Iniciar la búsqueda de red..."
-
-#: ../main.py:338
-msgid "The BTP+ server is available. You can update this machine."
-msgstr "El servidor BTP+ está disponible. Puede actualizar su equipo."
-
-#: ../main.py:134
-msgid "Wifi Password"
-msgstr "Clave wifi"
-
-#: ../main.py:117
-msgid "Wifi password"
-msgstr "Clave wifi"
-
-#: ../main.py:156
-msgid "Yes"
-msgstr "Sí"
-
-#: ../main.py:73
+#: ../main-nm.py:115
 msgid ""
 "Your about to start the updater which will update this system.\n"
 "Be aware that this can take between 15 minutes and one hour depending on the "
@@ -152,3 +33,204 @@ msgstr ""
 "tamaño de la actualización.\n"
 "¡La actualización no se puede interrumpir! \n"
 "¿Quiere comenzar la actualización?"
+
+#: ../main-nm.py:126 ../main-nm.py:128 ../main-nm.py:160
+msgid "Connect"
+msgstr "Conectar"
+
+#: ../main-nm.py:127
+msgid "Connected"
+msgstr "Conectado"
+
+#: ../main-nm.py:161 ../main-nm.py:252
+msgid "Exit"
+msgstr "Salir"
+
+#: ../main-nm.py:162
+msgid "Wifi password"
+msgstr "Clave wifi"
+
+#: ../main-nm.py:163
+msgid "Show password"
+msgstr "Mostrar contraseña"
+
+#: ../main-nm.py:179
+msgid "Please give a password"
+msgstr "Por favor, escriba una contraseña"
+
+#: ../main-nm.py:179
+msgid "Wifi Password"
+msgstr "Clave wifi"
+
+#: ../main-nm.py:201
+msgid "Yes"
+msgstr "Sí"
+
+#: ../main-nm.py:202
+msgid "No"
+msgstr "No"
+
+#: ../main-nm.py:251
+msgid "Scan"
+msgstr "Escanear"
+
+#: ../main-nm.py:253
+msgid "Start Update"
+msgstr "Iniciar la actualización"
+
+#: ../main-nm.py:254
+msgid "Welcome to the BrainTrainerPlus Network Manager"
+msgstr "Bienvenido al gestor de red de BrainTrainerPlus"
+
+#: ../main-nm.py:255
+msgid "Forget all connections"
+msgstr "Olvidar todas las conexiones"
+
+#: ../main-nm.py:256 ../main-nm.py:433
+msgid "Not connected"
+msgstr "Sin conexión"
+
+#: ../main-nm.py:257
+msgid "Starting network and wifi radios, please wait..."
+msgstr "Iniciando la red y la conexión wifi, espere..."
+
+#: ../main-nm.py:258
+#, python-brace-format
+msgid "NMKivy Version: {version}"
+msgstr "Versión de NMKivy: {version}"
+
+#: ../main-nm.py:300
+#, python-brace-format
+msgid "Connecting to {ssid}, please wait..."
+msgstr "Conectando a {ssid}, espere..."
+
+#: ../main-nm.py:305
+msgid "Scanning, please wait..."
+msgstr "Escaneando, por favor espere..."
+
+#: ../main-nm.py:310
+msgid "Forgetting all connections..."
+msgstr "Olvidando todas las conexiones..."
+
+#: ../main-nm.py:311
+msgid "Forget all connections?"
+msgstr "¿Olvidar todas las conexiones?"
+
+#: ../main-nm.py:311
+msgid "Are you sure you want to forget all connections?"
+msgstr "¿Está seguro de que desea olvidar todas las conexiones?"
+
+#: ../main-nm.py:335
+#, python-brace-format
+msgid "WIFI: {ssid:20} - Signal: {signal:4} - {security}"
+msgstr "WIFI: {ssid:20} - Señal: {signal:4} - {security}"
+
+#: ../main-nm.py:343
+msgid "Scanning done."
+msgstr "Escaneo terminado."
+
+#: ../main-nm.py:356
+#, python-brace-format
+msgid "ETH: {connection} - State: {state}"
+msgstr "ETH: {connection} - Estado: {state}"
+
+#: ../main-nm.py:379
+#, python-brace-format
+msgid "Start Connecting to {ssid}..."
+msgstr "Iniciar la conexión a {ssid}..."
+
+#: ../main-nm.py:384 ../main-nm.py:507
+#, python-brace-format
+msgid "Failed to connect to {ssid}"
+msgstr "Fallo al conectar con {ssid}"
+
+#: ../main-nm.py:386 ../main-nm.py:520
+#, python-brace-format
+msgid "Connected to {ssid}"
+msgstr "Conectado a {ssid}"
+
+#: ../main-nm.py:388
+#, python-brace-format
+msgid "Failed to connect to {ssid}, check your password."
+msgstr "Fallo al conectar con {ssid}, revise su contraseña."
+
+#: ../main-nm.py:412
+#, python-brace-format
+msgid "Connected {connection} to {address}\n"
+msgstr "Conexión {connection} conectada a {address}\n"
+
+#: ../main-nm.py:423
+msgid ""
+"Cannot connect to the BTP+ server. Please use another connection or contact "
+"your IT department."
+msgstr ""
+"No se puede conectar al servidor BTP+. Utilice otra conexión o póngase en "
+"contacto con el servicio técnico BTP+."
+
+#: ../main-nm.py:428
+msgid "The BTP+ server is available. You can update this machine."
+msgstr "El servidor BTP+ está disponible. Puede actualizar su equipo."
+
+#: ../main-nm.py:443
+msgid "No wired device found"
+msgstr "No se encontró ningún dispositivo conectado a red"
+
+#: ../main-nm.py:453
+msgid "No wifi access points found"
+msgstr "No se ha encontrado ninguna red wifi"
+
+#: ../main-nm.py:468
+msgid ""
+"Failed to start network and/or wifi radio\n"
+"Make sure the wifi is enabled."
+msgstr ""
+"No se pudo iniciar la conexión\n"
+"Asegúrese que hay una red wifi disponible."
+
+#: ../main-nm.py:469
+msgid "Start network scan again after 3 seconds, please wait..."
+msgstr "El escaneo de red se reiniciará dentro de 3 segundos, espere..."
+
+#: ../main-nm.py:474
+msgid "Start network scanning, please wait..."
+msgstr "Iniciando el escaneo de red, espere..."
+
+#: ../main-nm.py:491
+#, python-brace-format
+msgid "Disconnecting from {ssid}, please wait..."
+msgstr "Desconectando de {ssid}, espere..."
+
+#: ../main-nm.py:493
+#, python-brace-format
+msgid "Failed to disconnect from {ssid}"
+msgstr "No se pudo desconectar de {ssid}"
+
+#: ../main-nm.py:497
+#, python-brace-format
+msgid "Disconnected from {ssid}"
+msgstr "Desconectado de {ssid}"
+
+#: ../main-nm.py:501
+#, python-brace-format
+msgid "Start connecting to {ssid}, please wait..."
+msgstr "Iniciar la conexión a {ssid}, por favor espere..."
+
+#: ../main-nm.py:510
+#, python-brace-format
+msgid "Failed to connect to {ssid}, wrong password?"
+msgstr "Fallo al conectar con {ssid}, revise su contraseña."
+
+#: ../main-nm.py:543
+msgid "Start Update?"
+msgstr "¿Iniciar la actualización?"
+
+#: ../main-nm.py:560
+msgid "Failed to forget all connections"
+msgstr "No se pudieron olvidar todas las conexiones"
+
+#: ../main-nm.py:562
+msgid "All connections forgotten"
+msgstr "Se han olvidado todas las conexiones"
+
+#~ msgid "Start network scan..."
+#~ msgstr "Iniciar la búsqueda de red..."

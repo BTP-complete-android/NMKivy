@@ -19,11 +19,11 @@
     background_normal: 'buttons/100_100_black.png'
     on_press: app.root.on_connect_toggle_button_clicked(self)
     on_state:
-        if self.state == 'down': self.text = 'Connected'
-        else: self.text = 'Connect'
+        if self.state == 'down': self.text = root.text_connected
+        else: self.text = root.text_connect
 
 <MyButton@Button>:
-    text: "Close"
+    text: ""
     bold: True
     background_normal: 'buttons/100_100_blue.png'
     background_down: 'buttons/100_100_black.png'
@@ -45,12 +45,12 @@
         orientation: 'horizontal'
         size_hint: 1, 0.1
         MyLabel:
-            text: "Welcome to the BrainTrainerPlus Network Manager"
+            text: root.text_welcome
             halign: 'center'
             pos_hint: {'center_x': 0.5}
             size_hint: 0.7, 1
         MyButton:
-            text: "Forget all connections"
+            text: root.text_forget
             size_hint_x: 0.3
             font_size: '20sp'
             on_release: root.on_forget_button_clicked()
@@ -83,7 +83,7 @@
 
     MyLabel:
         id: connect_label
-        text: "Not Connected"
+        text: root.text_not_connected
         font_size: '14dp'
         size_hint_y: 0.1
         padding_y: 0
@@ -125,7 +125,7 @@
             size_hint_y: 1
             valign: 'center'
             markup: True
-            text: "Startup network and wifi radios, please wait..."
+            text: root.text_startup
 
 #    ProgressBar:
 #        id: prog_b
@@ -138,7 +138,7 @@
         font_size: '10dp'
         size_hint_y: 0.05
         halign: 'center'
-        text: f"NMKivy Version: {version.version}"
+        text: root.text_version
 
 <_InputContent>:
 

@@ -11,7 +11,7 @@ echo "Making new dist"
 mkdir $NAME
 
 cd po
-python3.8 Po2Mo.py
+python3 Po2Mo.py
 cd -
 
 echo "Copy py files, excluding debug files"

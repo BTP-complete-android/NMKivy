@@ -247,6 +247,7 @@ def set_locale(lang=None):
                                          languages=languages)
         gettext.install('nmkivy', LOCALEDIR)
         os.environ['LANG'] = lang
+        os.environ['LANGUAGE'] = lang
         builtins.__dict__['_'] = lang_trans.gettext
     except Exception as info:
         txt = f"Cannot set language to '{lang}' \n switching to English"
@@ -263,6 +264,8 @@ def set_locale(lang=None):
     else:
         LOCALE_RTL = False
     LANG = lang
+    os.environ['LANG'] = lang
+    os.environ['LANGUAGE'] = lang
     module_logger.info("set_locale: Locale set to %s, RTL set to %s" % (LANG, LOCALE_RTL))
     _set_provisioner(provisioner_lang)
     nmcli.set_lang(lang)

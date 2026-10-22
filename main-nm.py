@@ -38,7 +38,10 @@ resource_add_path('patches')
 ##########################################################
 
 from utils import *
-lang, RTL = set_locale()
+from device_locale import resolve_device_locale
+from version import version as app_version
+
+lang, RTL = set_locale(resolve_device_locale())
 
 from kivy.config import Config
 # print("**** enable the inspector ****")
@@ -120,7 +123,9 @@ class MyLabel(Label):
     pass
 
 class MyToggle(ToggleButton):
-    text = StringProperty("Connect")
+    text_connect = StringProperty(_("Connect"))
+    text_connected = StringProperty(_("Connected"))
+    text = StringProperty(_("Connect"))
     connected_state = False
 
 class BusyBody(FloatLayout):
@@ -246,6 +251,11 @@ class NMDialog(BoxLayout):
     text_scan = StringProperty(_("Scan"))
     text_close = StringProperty(_("Exit"))
     text_update = StringProperty(_("Start Update"))
+    text_welcome = StringProperty(_("Welcome to the BrainTrainerPlus Network Manager"))
+    text_forget = StringProperty(_("Forget all connections"))
+    text_not_connected = StringProperty(_("Not connected"))
+    text_startup = StringProperty(_("Starting network and wifi radios, please wait..."))
+    text_version = StringProperty(_("NMKivy Version: {version}").format(version=app_version))
 
     anim = None
 
@@ -287,7 +297,7 @@ class NMDialog(BoxLayout):
         Clock.schedule_once(self.observer.start, 0.2)
 
     def on_connect_toggle_button_clicked(self, toggle):
-        self.display_message(_(f"Connecting to {toggle.ssid}, please wait..."))
+        self.display_message(_("Connecting to {ssid}, please wait...").format(ssid=toggle.ssid))
         Clock.schedule_once(partial(self.observer.on_connect_button_clicked, (toggle.ssid, toggle)))
 
     def on_scan_button_clicked(self, *args):
@@ -322,7 +332,8 @@ class NMDialog(BoxLayout):
                 tb.connected_state = True
             layout.add_widget(tb)
             self.toggles[item['ssid']] = tb
-            txt = f"WIFI: {item['ssid']:20} - Signal: {item['signal']:4} - {item['security']}"
+            txt = _("WIFI: {ssid:20} - Signal: {signal:4} - {security}").format(
+                ssid=item['ssid'], signal=item['signal'], security=item['security'])
             lbl = MyLabel(text=txt, font_size='15dp', font_name='RobotoMono-Regular')
             layout.add_widget(lbl)
 
@@ -342,7 +353,8 @@ class NMDialog(BoxLayout):
                 tb.connected_state = True
             self.ids.ethbox.add_widget(tb)
             self.toggles[item['connection']] = tb
-            txt = f"ETH: {item['connection']} - State: {item['state']}"
+            txt = _("ETH: {connection} - State: {state}").format(
+                connection=item['connection'], state=item['state'])
             lbl = MyLabel(text=txt, font_size='15dp', )
             self.ids.ethbox.add_widget(lbl)
 
@@ -364,16 +376,16 @@ class Controller:
             # probabaly hit the exit button
             return
 
-        self.Gui.display_message(_(f"Start Connecting to {ssid}..."))
+        self.Gui.display_message(_("Start Connecting to {ssid}...").format(ssid=ssid))
         # self.Gui.start_progressbar()
         result = connect_wifi(ssid, pas)
         # self.Gui.stop_progressbar()
         if not result:
-            self.Gui.display_message(_(f"Failed to connect to {ssid}"))
+            self.Gui.display_message(_("Failed to connect to {ssid}").format(ssid=ssid))
         elif result == 1:
-            self.Gui.display_message(_(f"Connected to {ssid}"))
+            self.Gui.display_message(_("Connected to {ssid}").format(ssid=ssid))
         else:
-            self.Gui.display_message(_(f"Failed to connect to {ssid}, check your password."))
+            self.Gui.display_message(_("Failed to connect to {ssid}, check your password.").format(ssid=ssid))
 
     def _check_for_connected(self, *args):
         """Called by a Clock interval, make sure we don't throw an exception """
@@ -397,7 +409,8 @@ class Controller:
                 self.logger.debug(f"using connection: {con}")
                 if not len(con) >= 2:
                     continue
-                txt = txt + _(f"Connected {con[0]} to {con[1]}\n")
+                txt += _("Connected {connection} to {address}\n").format(
+                    connection=con[0], address=con[1])
                 ssid = con[0]
                 if ssid not in self.Gui.toggles.keys():
                     self.logger.info(f"Could not find {ssid} in toggles, moving on")
@@ -417,7 +430,7 @@ class Controller:
                 self.Gui.ids.update_button.disabled = False
         else:
             self.logger.warning("No connections found")
-            txt = 'Not connected'
+            txt = _("Not connected")
             self.Gui.ids.update_button.disabled = True
         # self.Gui.stop_progressbar()
         self.Gui.ids.connect_label.text = txt.rstrip('\n')
@@ -475,26 +488,26 @@ class Controller:
         print(f"obj.connected_state: {obj.connected_state}")
         if obj.connected_state:
             module_logger.debug(f"Disconnecting {ssid}")
-            self.Gui.display_message(_(f"Disconnecting from {ssid}, please wait..."))
+            self.Gui.display_message(_("Disconnecting from {ssid}, please wait...").format(ssid=ssid))
             if not disconnect_connection(ssid):
-                self.Gui.display_message(_(f"Failed to disconnect from {ssid}"))
+                self.Gui.display_message(_("Failed to disconnect from {ssid}").format(ssid=ssid))
             else:
                 obj.state = 'normal'
                 obj.connected_state = False
-                self.Gui.display_message(_(f"Disconnected from {ssid}"))
+                self.Gui.display_message(_("Disconnected from {ssid}").format(ssid=ssid))
                 Clock.schedule_once(self._check_for_connected, 1)
             return
 
-        self.Gui.display_message(_(f"Start connecting to {ssid}, please wait..."))
+        self.Gui.display_message(_("Start connecting to {ssid}, please wait...").format(ssid=ssid))
 
         # self.Gui.start_progressbar()
         result = connect_wifi(ssid)
         # self.Gui.stop_progressbar()
         if not result:
-            self.Gui.display_message(_(f"Failed to connect to {ssid}"))
+            self.Gui.display_message(_("Failed to connect to {ssid}").format(ssid=ssid))
             obj.state = 'normal'
         elif result == 2:
-            self.Gui.display_message(_(f"Failed to connect to {ssid}, wrong password?"))
+            self.Gui.display_message(_("Failed to connect to {ssid}, wrong password?").format(ssid=ssid))
             reset_connection(ssid)
         elif result == -1:
             # Unknown connection, needs a password (probably)
@@ -504,7 +517,7 @@ class Controller:
         else:
             obj.state = 'down'
             obj.connected_state = True
-            self.Gui.display_message(_(f"Connected to {ssid}"))
+            self.Gui.display_message(_("Connected to {ssid}").format(ssid=ssid))
             self._check_for_connected()
 
     ## Bottom buttons callbacks
@@ -527,7 +540,7 @@ class Controller:
             else:
                 os.system('sudo /usr/local/bin/start_updater &')
 
-        dlg = YesNoDialog("Start Update?", updater_text, cbf=cbf)
+        dlg = YesNoDialog(_("Start Update?"), updater_text, cbf=cbf)
         dlg.open()
 
 
