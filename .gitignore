@@ -1,2 +1,4 @@
 /.venv3.12/
 /dist/
+/locale/
+/po/Po2Mo.log
